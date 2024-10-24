@@ -1,7 +1,7 @@
 const period = document.getElementById("period");  //for later ;)
 
 var months = ['January','Febuary','March','April','May','June','July','August','September','October','November','December']
-
+var ender = "AM"
 setInterval(() => {
     const now = new Date();
     const mont = now.getMonth();
@@ -9,7 +9,7 @@ setInterval(() => {
     const hours = now.getHours();
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
-    const ender = "AM"
+
 
     const month = months[mont] //selects the month from the array
     document.getElementById("period").innerHTML = `Today is: ${month} ${day}, ${hours}:${minutes}:${seconds} ${ender}`; //changes the H1
