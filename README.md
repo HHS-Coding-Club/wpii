@@ -1,2 +1,10 @@
-# wpii
-Tool for checking what period it is even though the Hanford bell schedule is online!
+# wpii (What Period Is It?)
+**A tool for telling you what period it is!**
+
+Currently WIP 
+Produced by Kameron Livingston w/ HHS Coding Club
+
+**ROADMAP:**
+- [x] Create Repo
+- [ ] 
+- [ ] 
