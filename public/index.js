@@ -4,6 +4,6 @@ const day = now.getDay(); // returns a number representing the day of the week, 
 const hours = now.getHours();
 const minutes = now.getMinutes();
 
-while(true) {
+while(true == true) {
 document.getElementById("period").innerHTML= `Today is day ${day} and the time is ${hours}:${minutes}.`;
 }
