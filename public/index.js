@@ -1,24 +1,33 @@
 const period = document.getElementById("period");  //for later ;)
 
-var months = ['January','Febuary','March','April','May','June','July','August','September','October','November','December']
-var ender = "AM"
+var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var ender = "AM";
+
+function padZero(num) {
+    return num < 10 ? '0' + num : num;
+}
+
 setInterval(() => {
     const now = new Date();
     const mont = now.getMonth();
     const day = now.getDate();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
+    let hours = now.getHours();
+    const minutes = padZero(now.getMinutes());
+    const seconds = padZero(now.getSeconds());
 
+    const month = months[mont]; // selects the month from the array
 
-    const month = months[mont] //selects the month from the array
-    document.getElementById("period").innerHTML = `Today is: ${month} ${day}, ${hours}:${minutes}:${seconds} ${ender}`; //changes the H1
-    document.getElementById("title").innerHTML = `${month} ${day}`; //changes title
-    if(hours > 13){
-        hours = hours - 12;
+    if (hours > 12) {
+        hours -= 12;
         ender = "PM";
-    }
-    else {
+    } else {
         ender = "AM";
     }
-}, 250); //updates display every 1/4 of a second
+
+    if (hours === 0) {
+        hours = 12;
+    }
+
+    document.getElementById("period").innerHTML = `Today is: ${month} ${day}, ${hours}:${minutes}:${seconds} ${ender}`; // changes the H1
+    document.getElementById("title").innerHTML = `${month} ${day}`; // changes title
+}, 250); // updates display every 1/4 of a second
