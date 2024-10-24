@@ -4,7 +4,7 @@
 Currently WIP <br>
 Produced by Kameron Livingston w/ HHS Coding Club <br>
 Using Carbonated Lisence Version 1.0 <br>
-	<sup>© Jack Spencer 2024</sup>
+	<sup>© Kameron Livingston 2024</sup>
 
 **ROADMAP:**
 - [x] Create Webpage
