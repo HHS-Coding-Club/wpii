@@ -10,7 +10,7 @@ setInterval(() => {
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
 
-    const month = months[mont + 1] //selects the month from the array
+    const month = months[mont] //selects the month from the array
     document.getElementById("period").innerHTML = `Today is: ${month} ${day}, ${hours}:${minutes}:${seconds}`; //changes the H1
     document.getElementById("title").innerHTML = `${month} ${day}`; //changes title
 }, 250); //updates display every 1/4 of a second
