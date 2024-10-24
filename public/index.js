@@ -1,4 +1,6 @@
 const period = document.getElementById("period"); 
+var months = [ "January", "February", "March", "April", "May", "June", 
+    "July", "August", "September", "October", "November", "December" ];
 
 setInterval(() => {
     const now = new Date();
@@ -8,8 +10,6 @@ setInterval(() => {
     const hours = now.getHours();
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
-    var months = [ "January", "February", "March", "April", "May", "June", 
-        "July", "August", "September", "October", "November", "December" ];
 
     document.getElementById("period").innerHTML = `Today is: ${monthname} ${day}, ${hours}:${minutes}:${seconds}`;
     document.getElementById("title").innerHTML = `${monthname} ${day}`;
