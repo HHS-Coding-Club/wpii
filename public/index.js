@@ -8,4 +8,4 @@ const hours = now.getHours();
 const minutes = now.getMinutes();
 const seconds = now.getSeconds();
 document.getElementById("period").innerHTML= `Today is: ${month} ${day}, ${hours}:${minutes}:${seconds}`;
-}, 500);
+}, 250);
