@@ -2,7 +2,7 @@ const period = document.getElementById("period");
 
 setInterval(() => {
 const now = new Date();
-const month = now.getMonth());
+const month = now.getMonth();
 const day = now.getDate();
 const hours = now.getHours();
 const minutes = now.getMinutes();
