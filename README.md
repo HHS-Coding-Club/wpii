@@ -3,6 +3,8 @@
 
 Currently WIP <br>
 Produced by Kameron Livingston w/ HHS Coding Club
+Using Carbonate Lisence Version 1.0
+	<sup>© Jack Spencer 2024</sup>
 
 **ROADMAP:**
 - [ ] Create Webpage
