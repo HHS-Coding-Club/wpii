@@ -70,8 +70,23 @@ setInterval(() => {
         if(hours > 11 && minutes > 55) {
             var selector = "4th Hour / 2nd Lunch"
         };
-        if(hours > 12 && minutes > ) {
-            var selector = "1st Hour"
+        if(hours > 12 && minutes > 25) {
+            var selector = "Before 5th"
+        };
+        if(hours > 12 && minutes > 30) {
+            var selector = "5th Hour"
+        };
+        if(hours > 13 && minutes > 25) {
+            var selector = "Before 6th"
+        };
+        if(hours > 13 && minutes > 30) {
+            var selector = "6th Hour"
+        };
+        if(hours > 14 && minutes > 25) {
+            var selector = "End of school / Clubs"
+        };
+        if(hours > 15 && minutes > 25) {
+            var selector = "End of school"
         };
 
     };
