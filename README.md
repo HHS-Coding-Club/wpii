@@ -16,7 +16,8 @@ This tool will save you a ton of time trying to find those answers!
 ## **ROADMAP:**
 - [x] Create Webpage
 - [x] Time Identification
-- [ ] Period Identification
+- [x] Period Identification
+- [ ] Visual Extras
 - [ ] Club Identification
 - [ ] Spirit Week Identification
 - [ ] Translations into other languages
