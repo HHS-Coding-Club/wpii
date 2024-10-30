@@ -1,4 +1,4 @@
-const period = document.getElementById("period");  //for later ;)
+const period = document.getElementById("period");
 
 var selector = "Initializing..."
 
