@@ -3,7 +3,7 @@
 
 Currently WIP <br>
 Produced by Kameron Livingston w/ HHS Coding Club <br>
-Using Carbonated Lisence Version 1.0 <br>
+Using Apache Liscence 2.0 <br>
 	<sup>© Kameron Livingston 2024</sup>
 
 # What is it?
