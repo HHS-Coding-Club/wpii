@@ -3,8 +3,7 @@
 
 Currently WIP <br>
 Produced by Kameron Livingston w/ HHS Coding Club <br>
-Using Apache Liscence 2.0 <br>
-	<sup>© Kameron Livingston 2024</sup>
+Using Apache Licence 2.0 <br>
 
 # What is it?
 wpii is an open-source tool used for telling you what period it currently is at Hanford High School (other's if the support goes far enough).
