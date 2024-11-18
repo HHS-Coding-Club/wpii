@@ -34,75 +34,75 @@ function update() {
 
     // Determine the school period
     if (dow === 1 || dow === 2 || dow === 4) { // Monday, Tuesday, Thursday
-        if (hours === 6 && minutes >= 55) {
+        if (hours === 6 && minutes >= 55 && minutes <= 59) {
             selector = "0 Hour";
-        } else if (hours === 7 && minutes < 50) {
+        } else if (hours === 7 && minutes >= 55 && minutes <= 59) {
             selector = "1st Period";
-        } else if (hours === 8 && minutes < 50) {
+        } else if (hours === 8 && minutes >= 55 && minutes <= 59) {
             selector = "2nd Period";
-        } else if (hours === 9 && minutes < 55) {
+        } else if (hours === 9 && minutes >= 55 && minutes <= 59) {
             selector = "3rd Period";
-        } else if (hours === 10 && minutes < 55) {
+        } else if (hours === 10 && minutes >= 55 && minutes <= 59) {
             selector = "1st Lunch";
-        } else if (hours === 11 && minutes < 25) {
-            selector = "4th Period"; // First block of 4th Period
+        } else if (hours === 11 && minutes >= 0 && minutes < 25) {
+            selector = "4th Period";
         } else if (hours === 11 && minutes >= 30 && minutes < 55) {
-            selector = "4th Period"; // Second block of 4th Period
-        } else if (hours === 11 && minutes >= 55) {
+            selector = "4th Period";
+        } else if (hours === 11 && minutes >= 55 && minutes <= 59) {
             selector = "2nd Lunch";
-        } else if (hours === 12 && minutes < 25) {
+        } else if (hours === 12 && minutes >= 0 && minutes < 25) {
             selector = "5th Period";
-        } else if (hours === 12 && minutes >= 30) {
+        } else if (hours === 12 && minutes >= 30 && minutes <= 59) {
             selector = "6th Period";
-        } else if (hours === 1 && minutes < 25) {
+        } else if (hours === 1 && minutes >= 0 && minutes < 25) {
             selector = "7th Period";
         } else {
             selector = "After School"; // Default case if none match
         }
     } else if (dow === 3) { // Wednesday
-        if (hours === 6 && minutes >= 55) {
+        if (hours === 6 && minutes >= 55 && minutes <= 59) {
             selector = "0 Hour";
-        } else if (hours === 7 && minutes < 45) {
+        } else if (hours === 7 && minutes >= 55 && minutes <= 59) {
             selector = "1st Period";
-        } else if (hours === 8 && minutes < 15) {
+        } else if (hours === 8 && minutes >= 50 && minutes <= 59) {
             selector = "Advisory";
-        } else if (hours === 9 && minutes < 10) {
+        } else if (hours === 9 && minutes >= 20 && minutes <= 59) {
             selector = "2nd Period";
-        } else if (hours === 10 && minutes < 10) {
+        } else if (hours === 10 && minutes >= 15 && minutes <= 59) {
             selector = "3rd Period";
-        } else if (hours === 11 && minutes < 40) {
+        } else if (hours === 11 && minutes >= 10 && minutes <= 39) {
             selector = "1st Lunch";
-        } else if (hours === 11 && minutes >= 45) {
+        } else if (hours === 11 && minutes >= 45 && minutes <= 59) {
             selector = "4th Period";
-        } else if (hours === 12 && minutes < 5) {
-            selector = "4th Period"; // Second block of 4th Period
-        } else if (hours === 12 && minutes >= 5 && minutes < 35) {
+        } else if (hours === 12 && minutes >= 0 && minutes < 5) {
+            selector = "4th Period";
+        } else if (hours === 12 && minutes >= 5 && minutes <= 35) {
             selector = "2nd Lunch";
-        } else if (hours === 12 && minutes >= 35) {
+        } else if (hours === 12 && minutes >= 35 && minutes <= 59) {
             selector = "5th Period";
-        } else if (hours === 1 && minutes < 25) {
+        } else if (hours === 1 && minutes >= 0 && minutes < 25) {
             selector = "6th Period";
-        } else if (hours === 2 && minutes < 25) {
+        } else if (hours === 2 && minutes >= 0 && minutes < 25) {
             selector = "7th Period";
         } else {
             selector = "After School"; // Default case if none match
         }
     } else if (dow === 5) { // Friday
-        if (hours === 6 && minutes >= 55) {
+        if (hours === 6 && minutes >= 55 && minutes <= 59) {
             selector = "0 Hour";
-        } else if (hours === 7 && minutes < 40) {
+        } else if (hours === 7 && minutes >= 55 && minutes <= 59) {
             selector = "1st Period";
-        } else if (hours === 8 && minutes < 30) {
+        } else if (hours === 8 && minutes >= 45 && minutes <= 59) {
             selector = "2nd Period";
-        } else if (hours === 9 && minutes < 20) {
+        } else if (hours === 9 && minutes >= 35 && minutes <= 59) {
             selector = "3rd Period";
-        } else if (hours === 10 && minutes < 55) {
+        } else if (hours === 10 && minutes >= 20 && minutes <= 59) {
             selector = "ONECH (One Lunch)";
-        } else if (hours === 11 && minutes < 45) {
+        } else if (hours === 11 && minutes >= 0 && minutes < 45) {
             selector = "4th Period";
-        } else if (hours === 11 && minutes >= 50) {
+        } else if (hours === 11 && minutes >= 50 && minutes <= 59) {
             selector = "5th Period";
-        } else if (hours === 12 && minutes < 25) {
+        } else if (hours === 12 && minutes >= 0 && minutes < 25) {
             selector = "6th Period";
         } else {
             selector = "After School"; // Default case if none match
