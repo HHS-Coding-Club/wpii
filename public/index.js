@@ -121,7 +121,7 @@ function update() {
     // Calculate the time left until the end of the current class period
     let timetill = "Class not in session";
     if (currentPeriodEndTime !== null) {
-        const remainingTime = timeUntilEnd(currentTimeInMinutes, currentPeriodEndTime);
+        const remainingTime = timeUntilEnd(currentTimeInMinutes * 60, currentPeriodEndTime);
         timetill = `Time until end of class: ${remainingTime}`;
     }
 
