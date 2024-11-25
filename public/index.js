@@ -16,6 +16,14 @@ function timeIsInRange(currentTime, startTime, endTime) {
     return currentTime >= startTime && currentTime <= endTime;
 }
 
+// Function to calculate the remaining time in minutes and seconds
+function timeUntilEnd(currentTime, endTime) {
+    const timeLeftInMinutes = endTime - currentTime;
+    const minutesLeft = Math.floor(timeLeftInMinutes / 60);
+    const secondsLeft = timeLeftInMinutes % 60;
+    return `${minutesLeft}m ${padZero(secondsLeft)}s`;
+}
+
 function update() {
     const now = new Date();
     const dow = now.getDay(); // Day of the week (0: Sunday, 1: Monday, ..., 6: Saturday)
@@ -44,7 +52,7 @@ function update() {
     // Define period start and end times for each day
     const schedules = {
         1: [ // Monday
-            { period: "0 Hour", start: 6 * 60 + 55, end: 7 * 60 }, // 0 Hour
+            { period: "0 Hour", start: 6 * 60 + 55, end: 7 * 60 },
             { period: "1st Period", start: 7 * 60 + 55, end: 8 * 60 + 50 },
             { period: "2nd Period", start: 8 * 60 + 55, end: 9 * 60 + 50 },
             { period: "3rd Period", start: 9 * 60 + 55, end: 10 * 60 + 50 },
@@ -89,18 +97,38 @@ function update() {
 
     // Loop through the periods for the current day and find the matching period
     const todaySchedule = schedules[dow];
+    let currentPeriodEndTime = null;
+    let lunchPeriod = null;
     if (todaySchedule) {
         for (let i = 0; i < todaySchedule.length; i++) {
             const { period: currentPeriod, start, end } = todaySchedule[i];
             if (timeIsInRange(currentTimeInMinutes, start, end)) {
-                selector = currentPeriod;
+                if (currentPeriod === "4th Period" && lunchPeriod) {
+                    // Combine 4th Period with the lunch period
+                    selector = `4th Period & ${lunchPeriod}`;
+                } else {
+                    selector = currentPeriod;
+                }
+                currentPeriodEndTime = end; // Store the end time of the current period
+                if (currentPeriod === "1st Lunch" || currentPeriod === "2nd Lunch") {
+                    lunchPeriod = currentPeriod; // Store which lunch period is happening
+                }
                 break;
             }
         }
     }
+
+    // Calculate the time left until the end of the current class period
+    let timetill = "Class not in session";
+    if (currentPeriodEndTime !== null) {
+        const remainingTime = timeUntilEnd(currentTimeInMinutes, currentPeriodEndTime);
+        timetill = `Time until end of class: ${remainingTime}`;
+    }
+
     // Update the time display
     document.getElementById("time").innerHTML = `Today is: ${month} ${day}, ${hourd}:${minutes}:${seconds} ${ender}`;
-    document.getElementById("title").innerHTML = `${hourd}:${minutes}`; // Changes title
+    document.getElementById("title").innerHTML = `${hourd}:${minutes}`;
+    document.getElementById("haulong").innerHTML = timetill;
     period.innerHTML = `${selector}`;
     requestAnimationFrame(update);
 }
