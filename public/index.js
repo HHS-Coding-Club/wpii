@@ -4,117 +4,106 @@ var months = [
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
-var ender = "AM"; // Sets default ending bit to AM
+var ender = "AM"; // Default to AM
 
+// Helper function to pad minutes or seconds with a leading zero
 function padZero(num) {
     return num < 10 ? "0" + num : num;
-} // Pads a 0 to the beginning of any number smaller than 10
+}
+
+// Function to compare two times
+function timeIsInRange(currentTime, startTime, endTime) {
+    return currentTime >= startTime && currentTime <= endTime;
+}
 
 function update() {
     const now = new Date();
-    const dow = now.getDay(); // Get the current day of the week (0: Sunday, 1: Monday, ..., 6: Saturday)
+    const dow = now.getDay(); // Day of the week (0: Sunday, 1: Monday, ..., 6: Saturday)
     const mont = now.getMonth();
     const day = now.getDate();
     let hours = now.getHours();
     const minutes = padZero(now.getMinutes());
     const seconds = padZero(now.getSeconds());
 
-    const month = months[mont]; // Selects the month from the array
+    const month = months[mont]; // Selects the month
     let hourd = hours; // Initialize hourd
     if (hours >= 12) {
         hourd -= 12;
-        ender = "PM"; // Checks if it's past noon, making it PM
+        ender = "PM"; // Past noon, PM
     } else {
-        ender = "AM";
+        ender = "AM"; // Before noon, AM
     }
 
     if (hourd === 0) {
-        hourd = 12; // Changes 0, or midnight to say 12 for midnight
+        hourd = 12; // Handle 0 hour (midnight) as 12 AM
     }
 
-    // Determine the school period
-    if (dow === 1 || dow === 2 || dow === 4) { // Monday, Tuesday, Thursday
-        if (hours === 6 && minutes >= 55 && minutes <= 59) {
-            selector = "0 Hour";
-        } else if (hours === 7 && minutes >= 55 && minutes <= 59) {
-            selector = "1st Period";
-        } else if (hours === 8 && minutes >= 55 && minutes <= 59) {
-            selector = "2nd Period";
-        } else if (hours === 9 && minutes >= 55 && minutes <= 59) {
-            selector = "3rd Period";
-        } else if (hours === 10 && minutes >= 55 && minutes <= 59) {
-            selector = "1st Lunch";
-        } else if (hours === 11 && minutes >= 0 && minutes < 25) {
-            selector = "4th Period";
-        } else if (hours === 11 && minutes >= 30 && minutes < 55) {
-            selector = "4th Period";
-        } else if (hours === 11 && minutes >= 55 && minutes <= 59) {
-            selector = "2nd Lunch";
-        } else if (hours === 12 && minutes >= 0 && minutes < 25) {
-            selector = "5th Period";
-        } else if (hours === 12 && minutes >= 30 && minutes <= 59) {
-            selector = "6th Period";
-        } else if (hours === 1 && minutes >= 0 && minutes < 25) {
-            selector = "7th Period";
-        } else {
-            selector = "After School"; // Default case if none match
+    // Convert current time into minutes for easier comparison
+    const currentTimeInMinutes = hours * 60 + now.getMinutes();
+
+    // Define period start and end times for each day
+    const schedules = {
+        1: [ // Monday
+            { period: "0 Hour", start: 6 * 60 + 55, end: 7 * 60 }, // 0 Hour
+            { period: "1st Period", start: 7 * 60 + 55, end: 8 * 60 + 50 },
+            { period: "2nd Period", start: 8 * 60 + 55, end: 9 * 60 + 50 },
+            { period: "3rd Period", start: 9 * 60 + 55, end: 10 * 60 + 50 },
+            { period: "1st Lunch", start: 10 * 60 + 55, end: 11 * 60 + 25 },
+            { period: "4th Period", start: 11 * 60, end: 11 * 60 + 25 }, // Before lunch
+            { period: "4th Period", start: 11 * 60 + 30, end: 11 * 60 + 55 }, // After lunch
+            { period: "2nd Lunch", start: 11 * 60 + 55, end: 12 * 60 + 25 },
+            { period: "5th Period", start: 12 * 60 + 30, end: 13 * 60 + 25 },
+            { period: "6th Period", start: 13 * 60 + 30, end: 14 * 60 + 25 },
+            { period: "7th Period", start: 14 * 60 + 30, end: 15 * 60 + 25 }
+        ],
+        2: [ // Tuesday
+            // Same schedule as Monday
+        ],
+        3: [ // Wednesday
+            { period: "0 Hour", start: 6 * 60 + 55, end: 7 * 60 },
+            { period: "1st Period", start: 7 * 60 + 55, end: 8 * 60 + 45 },
+            { period: "Advisory", start: 8 * 60 + 50, end: 9 * 60 + 15 },
+            { period: "2nd Period", start: 9 * 60 + 20, end: 10 * 60 + 10 },
+            { period: "3rd Period", start: 10 * 60 + 15, end: 11 * 60 + 10 },
+            { period: "1st Lunch", start: 11 * 60 + 15, end: 11 * 60 + 40 },
+            { period: "4th Period", start: 11 * 60 + 45, end: 12 * 60 + 5 },
+            { period: "2nd Lunch", start: 12 * 60 + 5, end: 12 * 60 + 35 },
+            { period: "5th Period", start: 12 * 60 + 40, end: 13 * 60 + 30 },
+            { period: "6th Period", start: 13 * 60 + 35, end: 14 * 60 + 25 },
+            { period: "7th Period", start: 14 * 60 + 30, end: 15 * 60 + 25 }
+        ],
+        4: [ // Thursday
+            // Same schedule as Monday
+        ],
+        5: [ // Friday (PLC Schedule)
+            { period: "0 Hour", start: 6 * 60 + 55, end: 7 * 60 },
+            { period: "1st Period", start: 7 * 60 + 55, end: 8 * 60 + 40 },
+            { period: "2nd Period", start: 8 * 60 + 45, end: 9 * 60 + 30 },
+            { period: "3rd Period", start: 9 * 60 + 35, end: 10 * 60 + 20 },
+            { period: "ONECH (One Lunch)", start: 10 * 60 + 20, end: 10 * 60 + 55 },
+            { period: "4th Period", start: 11 * 60, end: 11 * 60 + 45 },
+            { period: "5th Period", start: 11 * 60 + 50, end: 12 * 60 + 35 },
+            { period: "6th Period", start: 12 * 60 + 40, end: 13 * 60 + 25 }
+        ]
+    };
+
+    // Loop through the periods for the current day and find the matching period
+    const todaySchedule = schedules[dow];
+    if (todaySchedule) {
+        for (let i = 0; i < todaySchedule.length; i++) {
+            const { period: currentPeriod, start, end } = todaySchedule[i];
+            if (timeIsInRange(currentTimeInMinutes, start, end)) {
+                selector = currentPeriod;
+                break;
+            }
         }
-    } else if (dow === 3) { // Wednesday
-        if (hours === 6 && minutes >= 55 && minutes <= 59) {
-            selector = "0 Hour";
-        } else if (hours === 7 && minutes >= 55 && minutes <= 59) {
-            selector = "1st Period";
-        } else if (hours === 8 && minutes >= 50 && minutes <= 59) {
-            selector = "Advisory";
-        } else if (hours === 9 && minutes >= 20 && minutes <= 59) {
-            selector = "2nd Period";
-        } else if (hours === 10 && minutes >= 15 && minutes <= 59) {
-            selector = "3rd Period";
-        } else if (hours === 11 && minutes >= 10 && minutes <= 39) {
-            selector = "1st Lunch";
-        } else if (hours === 11 && minutes >= 45 && minutes <= 59) {
-            selector = "4th Period";
-        } else if (hours === 12 && minutes >= 0 && minutes < 5) {
-            selector = "4th Period";
-        } else if (hours === 12 && minutes >= 5 && minutes <= 35) {
-            selector = "2nd Lunch";
-        } else if (hours === 12 && minutes >= 35 && minutes <= 59) {
-            selector = "5th Period";
-        } else if (hours === 1 && minutes >= 0 && minutes < 25) {
-            selector = "6th Period";
-        } else if (hours === 2 && minutes >= 0 && minutes < 25) {
-            selector = "7th Period";
-        } else {
-            selector = "After School"; // Default case if none match
-        }
-    } else if (dow === 5) { // Friday
-        if (hours === 6 && minutes >= 55 && minutes <= 59) {
-            selector = "0 Hour";
-        } else if (hours === 7 && minutes >= 55 && minutes <= 59) {
-            selector = "1st Period";
-        } else if (hours === 8 && minutes >= 45 && minutes <= 59) {
-            selector = "2nd Period";
-        } else if (hours === 9 && minutes >= 35 && minutes <= 59) {
-            selector = "3rd Period";
-        } else if (hours === 10 && minutes >= 20 && minutes <= 59) {
-            selector = "ONECH (One Lunch)";
-        } else if (hours === 11 && minutes >= 0 && minutes < 45) {
-            selector = "4th Period";
-        } else if (hours === 11 && minutes >= 50 && minutes <= 59) {
-            selector = "5th Period";
-        } else if (hours === 12 && minutes >= 0 && minutes < 25) {
-            selector = "6th Period";
-        } else {
-            selector = "After School"; // Default case if none match
-        }
-    } else { // For weekends or any other undefined days
-        selector = "No School"; // Example default case for no school days
     }
 
-    document.getElementById("time").innerHTML = `Today is: ${month} ${day}, ${hourd}:${minutes}:${seconds} ${ender}`; // Changes the H1
+    // Update the time display
+    document.getElementById("time").innerHTML = `Today is: ${month} ${day}, ${hourd}:${minutes}:${seconds} ${ender}`;
     document.getElementById("title").innerHTML = `${month} ${day}`; // Changes title
-    period.innerHTML = `${selector}`;
-    
+    period.innerHTML = `${selector}`; // Show the current period
+
     requestAnimationFrame(update);
 }
 
