@@ -98,12 +98,10 @@ function update() {
             }
         }
     }
-
     // Update the time display
     document.getElementById("time").innerHTML = `Today is: ${month} ${day}, ${hourd}:${minutes}:${seconds} ${ender}`;
-    document.getElementById("title").innerHTML = `${month} ${day}`; // Changes title
-    period.innerHTML = `${selector}`; // Show the current period
-
+    document.getElementById("title").innerHTML = `${hourd}:${minutes}`; // Changes title
+    period.innerHTML = `${selector}`;
     requestAnimationFrame(update);
 }
 
