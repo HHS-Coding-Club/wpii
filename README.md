@@ -21,3 +21,4 @@ This tool will save you a ton of time trying to find those answers!
 - [ ] Spirit Week Identification
 - [ ] Translations into other languages
 
+![Wpii.](/public/Wpii.png)
