@@ -24,8 +24,7 @@ function timeUntilEnd(currentTime, endTime) {
     return `${minutesLeft}m ${padZero(secondsLeft)}s`;
 }
 
-function update() {
-    const now = new Date();
+const now = new Date();
     const dow = now.getDay(); // Day of the week (0: Sunday, 1: Monday, ..., 6: Saturday)
     const mont = now.getMonth();
     const day = now.getDate();
@@ -118,10 +117,11 @@ function update() {
         }
     }
 
+function update() {
     // Calculate the time left until the end of the current class period
     let timetill = "Class not in session";
     if (currentPeriodEndTime !== null) {
-        const remainingTime = timeUntilEnd(currentTimeInMinutes * 60, currentPeriodEndTime);
+        const remainingTime = timeUntilEnd(currentTimeInMinutes, currentPeriodEndTime);
         timetill = `Time until end of class: ${remainingTime}`;
     }
 
